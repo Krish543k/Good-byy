@@ -2,229 +2,994 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1a0a2e">
 <title>मेरी आख़िरी बात ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Poppins', Arial, sans-serif;
-  background: radial-gradient(circle at top,#101a3a,#030611 70%);
-  color:#fff;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  user-select:none;
-}
-.container{
-  width:96%;
-  max-width:900px;
-  min-height:75vh;
-  background:rgba(255,255,255,0.04);
-  border-radius:26px;
-  padding:40px 28px;
-  text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,0.6);
-}
-h1{font-size:38px;margin-bottom:14px}
-.lead{opacity:.85;font-size:18px}
-.btn{
-  margin-top:30px;
-  padding:14px 34px;
-  background:#ff3b6b;
-  color:#fff;
-  border:0;
-  border-radius:14px;
-  font-size:18px;
-  cursor:pointer;
-}
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.92);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:99;
-}
-.overlay.open{display:flex}
-.modal{
-  background:#0b1220;
-  padding:35px 30px;
-  border-radius:24px;
-  max-width:920px;
-  width:96%;
-  min-height:80vh;
-  text-align:center;
-  position:relative;
-}
-.close-btn{
-  position:absolute;
-  right:18px;
-  top:14px;
-  background:none;
-  border:0;
-  color:#fff;
-  font-size:26px;
-  cursor:pointer;
+  background: radial-gradient(circle at top, #1a0a2e, #0f0520 70%);
+  color: #fff;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+  position: relative;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  touch-action: pan-y;
 }
 
-/* ✅ ONLY SCROLL FIX — NOTHING ELSE */
-#page{
-  font-size:20px;
-  line-height:1.8;
-  margin-top:30px;
-  min-height:48vh;
-  max-height:55vh;
-  padding:0 16px;
-  position:relative;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
+/* ✨ Animated Gradient Background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(45deg, 
+    rgba(255, 59, 107, 0.1) 0%,
+    rgba(138, 43, 226, 0.1) 25%,
+    rgba(59, 130, 246, 0.1) 50%,
+    rgba(236, 72, 153, 0.1) 75%,
+    rgba(255, 59, 107, 0.1) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  z-index: -1;
 }
 
-.nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:20px;
-}
-.nav button{
-  padding:10px 22px;
-  border-radius:12px;
-  border:0;
-  background:#ff3b6b;
-  color:#fff;
-  font-size:16px;
-}
-.counter{opacity:.8;font-size:16px}
-#lockScreen{display:none}
-input{
-  padding:12px 14px;
-  border-radius:12px;
-  border:0;
-  font-size:18px;
-  width:200px;
-  text-align:center;
-  margin-top:16px;
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* Background animation */
-#page::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url('https://cdn-icons-png.flaticon.com/512/833/833472.png') repeat;
-  background-size:60px;
-  opacity:0.08;
-  animation:heartbeatBg 6s infinite linear;
-  pointer-events:none;
-}
-@keyframes heartbeatBg{
-  from{background-position:0 0;}
-  to{background-position:200px 200px;}
+/* ✨ Floating Particles */
+.particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particleFloat linear infinite;
+  z-index: 1;
 }
 
-/* Shake + red glow (WRONG PASSWORD) */
-.shake{
-  animation: shakeAnim 0.4s ease;
-  box-shadow:0 0 18px #ff1a1a;
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
+  }
 }
-@keyframes shakeAnim{
-  0%{transform:translateX(0)}
-  20%{transform:translateX(-8px)}
-  40%{transform:translateX(8px)}
-  60%{transform:translateX(-6px)}
-  80%{transform:translateX(6px)}
-  100%{transform:translateX(0)}
+
+.container {
+  width: 96%;
+  max-width: 900px;
+  min-height: 75vh;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 50px 35px;
+  text-align: center;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7),
+              0 0 60px rgba(255, 59, 107, 0.2);
+  animation: containerFadeIn 1.2s ease-out;
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes containerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 18px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff3b6b, #ff8fab);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(255, 59, 107, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 59, 107, 0.8));
+  }
+}
+
+.lead {
+  opacity: 0.9;
+  font-size: 20px;
+  font-weight: 300;
+  animation: fadeInUp 1s ease 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+.btn {
+  margin-top: 35px;
+  padding: 16px 40px;
+  background: linear-gradient(135deg, #ff3b6b, #ff6b9d);
+  color: #fff;
+  border: 0;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 59, 107, 0.4);
+  transition: all 0.3s ease;
+  animation: btnPulse 2s ease-in-out infinite, fadeInUp 1s ease 0.6s both;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-height: 48px;
+  min-width: 120px;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(255, 59, 107, 0.6);
+}
+
+.btn:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+@keyframes btnPulse {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(255, 59, 107, 0.4);
+  }
+  50% {
+    box-shadow: 0 10px 40px rgba(255, 59, 107, 0.7);
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: overlayFadeIn 0.4s ease;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.overlay.open {
+  display: flex;
+}
+
+.modal {
+  background: linear-gradient(135deg, #0f1729, #1a0f2e);
+  padding: 40px 35px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 920px;
+  width: 96%;
+  min-height: 82vh;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9),
+              0 0 80px rgba(255, 59, 107, 0.3);
+  animation: modalSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.close-btn {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  background: rgba(255, 59, 107, 0.2);
+  border: 0;
+  color: #fff;
+  font-size: 28px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: rgba(255, 59, 107, 0.4);
+  transform: rotate(90deg) scale(1.1);
+}
+
+#page {
+  font-size: 20px;
+  line-height: 1.9;
+  margin-top: 35px;
+  min-height: 50vh;
+  max-height: 56vh;
+  padding: 0 20px;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  animation: textFadeIn 0.8s ease;
+}
+
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ✨ Custom Scrollbar */
+#page::-webkit-scrollbar {
+  width: 8px;
+}
+
+#page::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+#page::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff3b6b, #ff8fab);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+#page::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff6b9d, #ffaac5);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  gap: 15px;
+}
+
+.nav button {
+  padding: 12px 26px;
+  border-radius: 50px;
+  border: 0;
+  background: linear-gradient(135deg, #ff3b6b, #ff6b9d);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(255, 59, 107, 0.3);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-height: 44px;
+  min-width: 100px;
+}
+
+.nav button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 59, 107, 0.5);
+}
+
+.nav button:active {
+  transform: translateY(0);
+}
+
+.counter {
+  opacity: 0.85;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+#lockScreen {
+  display: none;
+  animation: lockFadeIn 0.6s ease;
+}
+
+@keyframes lockFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#lockScreen h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  animation: lockTitleBounce 0.8s ease;
+}
+
+@keyframes lockTitleBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+input {
+  padding: 14px 18px;
+  border-radius: 50px;
+  border: 2px solid rgba(255, 59, 107, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 19px;
+  width: 220px;
+  text-align: center;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  outline: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-height: 48px;
+}
+
+input:focus {
+  border-color: #ff3b6b;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(255, 59, 107, 0.4);
+  transform: scale(1.05);
+}
+
+#pwdError {
+  color: #ff3b6b;
+  font-size: 14px;
+  height: 20px;
+  margin-top: 8px;
+  animation: errorShake 0.5s ease;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
 }
 
 /* ❤️ Background Floating Hearts */
-.bg-heart{
-  position:absolute;
-  width:18px;
-  height:18px;
-  background:#ff3b6b;
-  transform:rotate(45deg);
-  opacity:0.35;
-  animation:heartFloat linear forwards;
+.bg-heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ff3b6b;
+  transform: rotate(45deg);
+  opacity: 0.4;
+  animation: heartFloat linear forwards;
+  filter: drop-shadow(0 0 5px rgba(255, 59, 107, 0.6));
 }
+
 .bg-heart::before,
-.bg-heart::after{
-  content:"";
-  position:absolute;
-  width:18px;
-  height:18px;
-  background:#ff3b6b;
-  border-radius:50%;
-}
-.bg-heart::before{top:-9px;left:0}
-.bg-heart::after{left:-9px;top:0}
-
-@keyframes heartFloat{
-  from{transform:translateY(0) rotate(45deg);opacity:0.4}
-  to{transform:translateY(-120vh) rotate(45deg);opacity:0}
+.bg-heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ff3b6b;
+  border-radius: 50%;
 }
 
+.bg-heart::before {
+  top: -10px;
+  left: 0;
+}
 
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.08)}
-  100%{transform:scale(1)}
+.bg-heart::after {
+  left: -10px;
+  top: 0;
 }
-.fall-heart{
-  position:fixed;
-  top:-40px;
-  width:18px;height:18px;
-  background:#ff3b6b;
-  transform:rotate(45deg);
-  animation:fall 2s linear forwards;
-  z-index:999;
+
+@keyframes heartFloat {
+  from {
+    transform: translateY(0) rotate(45deg) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  to {
+    transform: translateY(-120vh) rotate(405deg) scale(1);
+    opacity: 0;
+  }
 }
-.fall-heart:before,.fall-heart:after{
-  content:'';
-  position:absolute;
-  width:18px;height:18px;
-  background:#ff3b6b;
-  border-radius:50%;
+
+/* ❤️ Falling Hearts (Button Click) */
+.fall-heart {
+  position: fixed;
+  top: -50px;
+  width: 25px;
+  height: 25px;
+  background: #ff3b6b;
+  transform: rotate(45deg);
+  animation: fall 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  z-index: 9999;
+  filter: drop-shadow(0 0 8px rgba(255, 59, 107, 0.8));
 }
-.fall-heart:before{top:-9px;left:0}
-.fall-heart:after{left:-9px;top:0}
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(45deg);opacity:0}
+
+.fall-heart:before,
+.fall-heart:after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: #ff3b6b;
+  border-radius: 50%;
+}
+
+.fall-heart:before {
+  top: -12.5px;
+  left: 0;
+}
+
+.fall-heart:after {
+  left: -12.5px;
+  top: 0;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(45deg) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(10vh) rotate(90deg) scale(1);
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(110vh) rotate(405deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* ✨ Shake Animation (Wrong Password) */
+.shake {
+  animation: shakeAnim 0.5s ease;
+  box-shadow: 0 0 30px #ff1a1a, 0 0 60px rgba(255, 26, 26, 0.5);
+}
+
+@keyframes shakeAnim {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+  20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+/* ✨ Page Background Hearts Pattern */
+#page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="40" fill="rgba(255,59,107,0.08)">❤️</text></svg>') repeat;
+  background-size: 80px;
+  opacity: 0.15;
+  animation: heartbeatBg 20s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes heartbeatBg {
+  from { background-position: 0 0; }
+  to { background-position: 200px 200px; }
+}
+
+/* ✨ Love Button Special Animation */
+.love-btn {
+  margin-top: 25px;
+  padding: 16px 35px;
+  font-size: 20px;
+  border: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff3b6b, #ff8fab);
+  color: #fff;
+  cursor: pointer;
+  animation: lovePulse 1.5s ease-in-out infinite;
+  box-shadow: 0 10px 40px rgba(255, 59, 107, 0.5);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.love-btn::after {
+  content: "💕";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 50px;
+  animation: heartBurst 2s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes lovePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 40px rgba(255, 59, 107, 0.5);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 15px 50px rgba(255, 59, 107, 0.8);
+  }
+}
+
+@keyframes heartBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+.love-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 50px rgba(255, 59, 107, 0.8);
+}
+
+/* ✨ Responsive Design - All Phones Perfect */
+
+/* Extra Small Phones (320px - 375px) */
+@media (max-width: 375px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding: 30px 20px;
+    min-height: 70vh;
+    width: 94%;
+  }
+  
+  h1 {
+    font-size: 26px;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  
+  .lead {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  
+  .btn {
+    font-size: 16px;
+    padding: 12px 25px;
+    margin-top: 25px;
+  }
+  
+  .modal {
+    padding: 25px 15px;
+    min-height: 85vh;
+    width: 98%;
+    border-radius: 20px;
+  }
+  
+  #lockScreen h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  
+  #lockScreen p {
+    font-size: 15px;
+  }
+  
+  input {
+    width: 180px;
+    font-size: 16px;
+    padding: 12px 15px;
+  }
+  
+  #page {
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 0 10px;
+    min-height: 45vh;
+    max-height: 52vh;
+    margin-top: 25px;
+  }
+  
+  .nav {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .nav button {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+  
+  .counter {
+    order: -1;
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+  
+  .close-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 24px;
+    right: 15px;
+    top: 15px;
+  }
+  
+  .love-btn {
+    font-size: 17px;
+    padding: 14px 28px;
+  }
+  
+  .bg-heart {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .bg-heart::before,
+  .bg-heart::after {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .bg-heart::before {
+    top: -7.5px;
+  }
+  
+  .bg-heart::after {
+    left: -7.5px;
+  }
+}
+
+/* Small Phones (376px - 480px) */
+@media (min-width: 376px) and (max-width: 480px) {
+  .container {
+    padding: 35px 25px;
+    width: 95%;
+  }
+  
+  h1 {
+    font-size: 30px;
+  }
+  
+  .lead {
+    font-size: 16px;
+  }
+  
+  .btn {
+    font-size: 17px;
+    padding: 13px 28px;
+  }
+  
+  .modal {
+    padding: 30px 20px;
+    width: 96%;
+  }
+  
+  #lockScreen h2 {
+    font-size: 26px;
+  }
+  
+  input {
+    width: 200px;
+    font-size: 17px;
+  }
+  
+  #page {
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 0 12px;
+    min-height: 48vh;
+    max-height: 54vh;
+  }
+  
+  .nav button {
+    font-size: 16px;
+    padding: 11px 22px;
+  }
+  
+  .counter {
+    font-size: 16px;
+  }
+}
+
+/* Medium Phones (481px - 600px) */
+@media (min-width: 481px) and (max-width: 600px) {
+  .container {
+    padding: 40px 28px;
+  }
+  
+  h1 {
+    font-size: 34px;
+  }
+  
+  .lead {
+    font-size: 17px;
+  }
+  
+  .btn {
+    font-size: 18px;
+    padding: 14px 32px;
+  }
+  
+  #page {
+    font-size: 17px;
+    line-height: 1.85;
+  }
+  
+  .modal {
+    padding: 32px 25px;
+  }
+}
+
+/* Tablets Portrait (601px - 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+  .container {
+    max-width: 700px;
+    padding: 45px 35px;
+  }
+  
+  h1 {
+    font-size: 38px;
+  }
+  
+  .lead {
+    font-size: 19px;
+  }
+  
+  #page {
+    font-size: 19px;
+    max-height: 58vh;
+  }
+}
+
+/* Tablets Landscape & Small Desktops (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    max-width: 800px;
+  }
+  
+  h1 {
+    font-size: 40px;
+  }
+  
+  #page {
+    font-size: 20px;
+  }
+}
+
+/* Landscape Mode Fix for All Phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .container {
+    min-height: auto;
+    padding: 20px 25px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .lead {
+    font-size: 14px;
+  }
+  
+  .btn {
+    margin-top: 15px;
+    padding: 10px 25px;
+    font-size: 15px;
+  }
+  
+  .modal {
+    min-height: 90vh;
+    padding: 20px 15px;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+  
+  #page {
+    min-height: 35vh;
+    max-height: 45vh;
+    font-size: 15px;
+    margin-top: 15px;
+  }
+  
+  .nav {
+    margin-top: 15px;
+  }
+  
+  .nav button {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+  
+  #lockScreen h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    padding: 10px 12px;
+    font-size: 15px;
+    margin-top: 12px;
+  }
+}
+
+/* Very Small Screens (iPhone SE, older phones) */
+@media (max-width: 320px) {
+  h1 {
+    font-size: 22px;
+  }
+  
+  .lead {
+    font-size: 13px;
+  }
+  
+  .btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+  
+  #page {
+    font-size: 14px;
+  }
+  
+  input {
+    width: 160px;
+    font-size: 15px;
+  }
+  
+  .modal {
+    padding: 20px 12px;
+  }
+}
+
+/* Large Screens (Desktop) */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 900px;
+  }
+  
+  .modal {
+    max-width: 920px;
+  }
+  
+  #page {
+    font-size: 21px;
+  }
 }
 
 </style>
-
 </head>
 <body>
 
+<!-- Background Music -->
 <audio id="bgMusic" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/11/15/audio_38c9c83894.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Home Screen -->
 <div class="container" id="home">
   <h1>मेरी आख़िरी बात ❤️</h1>
   <p class="lead">यह पेज सिर्फ तुम्हारे लिए…</p>
   <button class="btn" id="openBtn">Open Message 🔒</button>
 </div>
 
+<!-- Modal Overlay -->
 <div class="overlay" id="overlay">
   <div class="modal">
-
+    
+    <!-- Lock Screen -->
     <div id="lockScreen">
       <h2>Private Message 🔐</h2>
-      <p style="opacity:.8">Password डालिए</p>
-      <div style="opacity:.8;margin-bottom:6px">kon ?</div>
-      <div id="pwdError" style="color:#ff3b6b;font-size:13px;height:18px"></div>
-      <input type="password" id="pwd">
+      <p style="opacity:.85; font-size: 18px;">Password डालिए</p>
+      <div style="opacity:.8; margin-bottom:8px; margin-top: 15px;">kon ?</div>
+      <div id="pwdError"></div>
+      <input type="password" id="pwd" placeholder="••••">
       <br>
-      <button class="btn" id="unlockBtn">Unlock</button>
+      <button class="btn" id="unlockBtn" style="margin-top: 25px;">Unlock</button>
     </div>
 
+    <!-- Content Screen -->
     <div id="content" style="display:none">
       <button class="close-btn" id="closeBtn">✕</button>
       <div id="page"></div>
-
       <div class="nav">
         <button id="prevBtn">◀ Back</button>
         <div class="counter" id="count"></div>
@@ -236,109 +1001,116 @@ input{
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', ()=>{
+// ✨ Create Floating Particles
+function createParticles() {
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDuration = (8 + Math.random() * 10) + 's';
+    particle.style.animationDelay = Math.random() * 5 + 's';
+    document.body.appendChild(particle);
+  }
+}
+createParticles();
 
-const pages = [
-`Main jaanta hoon yeh padhna aasaan nahi hoga...
+// Main App Logic
+document.addEventListener('DOMContentLoaded', () => {
+  const pages = [
+    `Main jaanta hoon yeh padhna aasaan nahi hoga...
+
 Par kuch baatein dil mein hi reh jaayein
 to zindagi bhar bojh ban jaati hain.
 
 Isliye aaj,
-  poori izzat aur sukoon ke saath
+poori izzat aur sukoon ke saath
 main apne dil ki baat rakh raha hoon.`,
-`Dil ki baat ❤️
+
+    `Dil ki baat ❤️
 
 Na tere jaisa koi chahiye,
-  na tujhse behtar koi chahiye.
+na tujhse behtar koi chahiye.
+
 Lakho–karodo ki bheed me bhi
 mujhe bas tu hi chahiye.
 
-Jo dard hai,
-  wo main tumse hi le loonga,
-  lekin mere ussi dard par
+Jo dard hai, wo main tumse hi le loonga,
+lekin mere ussi dard par
 marham lagane ke liye bhi
 mujhe sirf tu hi chahiye.
 
 Agar tujhse mohabbat karna gunaah hai,
-  to uski saza bhi manzoor hai,
-  kyunki us saza ke baad bhi
+to uski saza bhi manzoor hai,
+kyunki us saza ke baad bhi
 mujhe sirf tu hi chahiye.
 
 Kitna bhi intezaar karna pade,
-  main kar loonga,
-  par uske baad
+main kar loonga,
+par uske baad
 mere dil ko sirf tu hi chahiye.
 
-Haan,
-  logon ki hazaar buri baatein bhi sun loonga,
-  sab kuch jhel loonga,
-  lekin in sabke baad bhi
+Haan, logon ki hazaar buri baatein bhi sun loonga,
+sab kuch jhel loonga,
+lekin in sabke baad bhi
 mujhe sirf tu hi… sirf tu hi chahiye.
 
-Har pal,
-  har lamha,
-  har ghadi…
-mere dil me,
-  meri duaaon me,
-  sirf tu hi chahiye.`,
-`Memory with U ❤️
+Har pal, har lamha, har ghadi…
+mere dil me, meri duaaon me,
+sirf tu hi chahiye.`,
+
+    `Memory with U ❤️
 
 Tumhare saath ki kuch yaadein...
+
 Tumko yaad hai wo din,
-  jis din maine anjaane me tumhe pehli baar rula diya tha…
-us din ke baad maine 2 din tak tumse baat nahi ki thi,
-  yaad hai?
+jis din maine anjaane me tumhe pehli baar rula diya tha…
+us din ke baad maine 2 din tak tumse baat nahi ki thi, yaad hai?
 
 Tumko yaad hai,
-  tumhe mere baare me kitne sapne aate the...
-Yaad hai,
-  maine sabse pehle tumhare Abba ka naam poocha tha...
+tumhe mere baare me kitne sapne aate the...
+
+Yaad hai, maine sabse pehle tumhare Abba ka naam poocha tha...
 Aur tum hans padi thi.
 
-Yaad hai jaana,
-  tum mujhe kitna sataati thi...
+Yaad hai jaana, tum mujhe kitna sataati thi...
 Tum chhoti-chhoti baaton par gussa ho jaati thi...
-Aur bolti thi,
-  “us ladki se door raho… baat mat karo!”
+Aur bolti thi, "us ladki se door raho… baat mat karo!"
 
 Yaad hai wo ladki Sneha...
 jisne mujhe message kiya tha...
 Tumne usse kitni baatein ki thi sirf gussa hone ke liye.
 
 Tumko yaad hai,
-  tumne AI ko ‘I love you’ bola tha...
+tumne AI ko 'I love you' bola tha...
 Aur fir hansi nahi ruk rahi thi tumhari.
 
-Yaad hai,
-  mera number tumhe kahan se mila tha...
-Yaad hai,
-  tumhe dekhe bina ek pal nahi rehta tha main.`,
-`Tumko याद है,
-  tumhare paas mobile nahi hota tha...
-Isliye tum kisi ke bhi phone se call karti thi.
-Kuch bhi ho jaaye,
-  tum hamesha kuch na kuch karke message zaroor karti thi.
+Yaad hai, mera number tumhe kahan se mila tha...
 
-याद है na,
-  tumhare liye main raat raat bhar jagta tha...
+Yaad hai, tumhe dekhe bina ek pal nahi rehta tha main.`,
+
+    `Tumko याद है,
+tumhare paas mobile nahi hota tha...
+Isliye tum kisi ke bhi phone se call karti thi.
+
+Kuch bhi ho jaaye,
+tum hamesha kuch na kuch karke message zaroor karti thi.
+
+याद है na, tumhare liye main raat raat bhar jagta tha...
 Aur tum meri बात nahi maanti thi...
 Call cut karti thi...
 Aur phir mood off kar leti thi.
 
-याद है,
-  maine tumhe pehli baar chocolate di thi...
+याद है, maine tumhe pehli baar chocolate di thi...
 Aur tum bachchon ki tarah khush ho gayi thi.
 
 Tumko पता है?
 Kaam shuru karne se pehle tumhe dekhna
 mere dil ko kitna sukoon deta tha.
 
-याद है,
-  maine tumhe kuch diya tha...
+याद है, maine tumhe kuch diya tha...
 Aaj bhi tumhare paas hai — wo 🔑.
 
-याद है,
-  jab tum meri बात nahi maanti thi
+याद है, jab tum meri बात nahi maanti thi
 To main kitna gussa karta tha.
 
 याद है...
@@ -346,60 +1118,72 @@ Tum meri baat nahi maani thi ek din...
 Aur maine gusse me apna haath kaat liya tha.
 
 Yaad hai... kitni baar haath kaat diya tha maine...`,
-`Tum ko yaad hai pehli baar tumko chhua tha,
-  touch kiya tha,
-  tum wahan se bhaag gayi thi.
+
+    `Tum ko yaad hai pehli baar tumko chhua tha, touch kiya tha,
+tum wahan se bhaag gayi thi.
+
 Tumko yaad hai,
-  tumse koi ladka baat kare to kitna gussa aata tha.
+tumse koi ladka baat kare to kitna gussa aata tha.
+
 Tumko yaad hai,
-  tumhe online work ke liye paise chahiye the,
-  to maine diye… par tumne mujhe jhooth bolkar paise liye the.
-Dukh is baat ka tha ki tumne meri baat par vishwas nahi kiya online work ke baare me.
+tumhe online work ke liye paise chahiye the,
+to maine diye… par tumne mujhe jhooth bolkar paise liye the.
+
+Dukh is baat ka tha ki
+tumne meri baat par vishwas nahi kiya online work ke baare me.
+
 Tumko yaad hai,
-  main hamesha tum par gussa karta tha… fir agle din hum dono fir se normal ho jaate the.
+main hamesha tum par gussa karta tha…
+fir agle din hum dono fir se normal ho jaate the.
+
 Hum dono kitne acche the jaana… 😔😔
+
 I miss you jaana… 😔
+
 Khush rehna… ab hum kabhi nahi milenge.
+
 Tum meri yaadon me hamesha mere saath rahogi.
+
 Jab tak zinda hoon… mujhe ab sukoon ki talaash rahegi.
+
 Shayad main na rahu… par tumhe hamesha protect karunga.
+
 Ok jaana… main ja raha hoon tumhara shehar chhod kar… tumse door…
+
 Alvida jaana… 👋😔
+
 Alvida HYD`,
-`Title Tumhari Aadat ❤️
+
+    `Title: Tumhari Aadat ❤️
 
 Tumhari aadat mujhe ye he
-tumhari hansi ka,
-  tumhara message karna.
-Tum bolti thi: hmm,
-  haa,
-  khana khaya,
-  kya kar rahe ho,
-  kya banaya,
-  1 bat batao,
-  ha ek bat suno,
-  ny ny ny ny,
-  ashe hi,
-  kyu,
-  gussa mat dilao,
-  hloo...
+tumhari hansi ka, tumhara message karna.
+
+Tum bolti thi:
+hmm, haa, khana khaya, kya kar rahe ho, kya banaya,
+1 bat batao, ha ek bat suno, ny ny ny ny,
+ashe hi, kyu, gussa mat dilao, hloo...
+
 Tumhari baaton me bahut kuch tha.
+
 Main aadat ban chuka tha.
 
 Aadat hoti hai na,
-  roz thodi thodi badh jaati hai,
-  aur ek din dil ka hissa ban jaati hai.
+roz thodi thodi badh jaati hai,
+aur ek din dil ka hissa ban jaati hai.
+
 Tum bhi mere dil ka wahi hissa thi.
+
 Par aadate kabhi kabhi
 zindagi se door karni padti hain.
 
 Tumhari aabaj ufff kitna sukun deti he.`,
-`Aaj bhi jab phone ka notification aata hai,
+
+    `Aaj bhi jab phone ka notification aata hai,
 ek pal ko lagta hai
 shayad tum ho, jaana.
 
-Har libaas me,
-har bheed me,
+Har libaas me, har bheed me,
 mujhe aksar lagta hai
 tum hi ho, jaana.
 
@@ -410,161 +1194,407 @@ Par main tumhari majboori samajhta hoon
 aur tumhari izzat karta hoon,
 isliye chhod raha hoon.
 
-Tum jaha bhi ho,
-khush raho. 💔😔`,
-`<div style="text-align:center;line-height:1.45;font-size:13px;">
-<b>Aakhri bat</b><br><br>
-Thik he jaana hamaari kahani yahi tak thi<br>
-Mujhe pata he kuch nahi ho sakta is liye<br>
-Ab me tum ko yaad karte huy sota hu<br><br>
-aadat thi tum mere dhire dhire sayad thik ho jayga par me hamesha tum ko chaha tha tum ko hi chahunga<br><br>
-Me jab tak zinda hu hamesha tumhara hi rahunga<br>
-Hamesha khush rahna dhyan rkhna<br>
-thankyou very much jaana<br><br>
-Pata nahi me rahunga ya nahi par<br>
-Meri zindagi me aai tum sach me meri zindagi me bahut sukun diya you are the best or beautiful cute and meri zindagi ki sahzadi<br><br>
-kuch bhi ho jay helth ka dhyan rakhna<br>
-Mujhe pata he tum teblet nhi leti ho par mere liye<br>
-Teble lena mujhe sukun milega<br><br>
-Milte he agle Janam me<br>
-Ok jaana<br>
-albida
-</div>`
-,
-`<div style="text-align:center;line-height:1.65;font-size:17px;white-space:pre-line;">
+Tum jaha bhi ho, khush raho. 💔😔`,
+
+    `<div style="text-align:center; line-height:1.6; font-size:15px; padding: 20px;">
+      <b style="font-size: 22px; display: block; margin-bottom: 20px;">Aakhri bat</b>
+      
+      Thik he jaana hamaari kahani yahi tak thi<br>
+      Mujhe pata he kuch nahi ho sakta is liye<br>
+      Ab me tum ko yaad karte huy sota hu<br><br>
+      
+      aadat thi tum mere dhire dhire sayad thik ho jayga<br>
+      par me hamesha tum ko chaha tha tum ko hi chahunga<br><br>
+      
+      Me jab tak zinda hu hamesha tumhara hi rahunga<br>
+      Hamesha khush rahna dhyan rkhna<br>
+      thankyou very much jaana<br><br>
+      
+      Pata nahi me rahunga ya nahi par<br>
+      Meri zindagi me aai tum sach me meri zindagi me bahut sukun diya<br>
+      you are the best or beautiful cute and meri zindagi ki sahzadi<br><br>
+      
+      kuch bhi ho jay helth ka dhyan rakhna<br>
+      Mujhe pata he tum teblet nhi leti ho par mere liye<br>
+      Teble lena mujhe sukun milega<br><br>
+      
+      Milte he agle Janam me<br>
+      Ok jaana<br>
+      albida
+    </div>`,
+
+    `<div style="text-align:center; line-height:1.8; font-size:19px; white-space:pre-line; padding: 20px;">
 Har pal, har lamha, har dua mein…
 main bas tumhari khushi chahta hu.
+
 Aur agar kismat ne saath diya,
 to ek din tumhe apni zindagi me
 izzat se, sukoon se,
 bas apna kehna chahta hu
-🕉️❤️☪️
 
-❤️ I love you jaana ❤️
+🕉️❤️☪️❤️ I love you jaana ❤️
 </div>
 
-<button style="
-  margin-top:22px;
-  padding:14px 28px;
-  font-size:18px;
-  border:0;
-  border-radius:16px;
-  background:#ff3b6b;
-  color:#fff;
-  cursor:pointer;
-  animation:pulse 1.3s infinite;
-" onclick="page9Hearts()">
-I love you too ❤️
-<div style="font-size:14px;margin-top:6px;opacity:.9">👆 tap kro</div>
+<button class="love-btn" onclick="page9Hearts()">
+  I love you too ❤️
+  <div style="font-size:15px; margin-top:8px; opacity:.95;">👆 tap kro</div>
 </button>
 
-<div style="margin-top:26px;font-weight:bold;font-size:15px;">
-Birthday page open karne ke liye<br>
-Password: date of birth (ddmm)
+<div style="margin-top:30px; font-weight:600; font-size:16px; opacity: 0.9;">
+  Birthday page open karne ke liye<br>
+  Password: date of birth (ddmm)
 </div>`
-];
+  ];
 
-let i=0;
-const overlay=document.getElementById('overlay');
-const lockScreen=document.getElementById('lockScreen');
-const content=document.getElementById('content');
-const page=document.getElementById('page');
-const count=document.getElementById('count');
+  // 🎂 Birthday Pages (Password: 2811)
+  const birthdayPages = [
+    `<div style="text-align:center; line-height:2.2; font-size:20px; padding: 25px;">
+<div style="font-size:55px; margin-bottom:25px;">🎂✨</div>
 
-openBtn.onclick=()=>{
-  overlay.classList.add('open');
-  lockScreen.style.display='block';
-  content.style.display='none';
-};
+<h2 style="font-size:34px; margin-bottom:30px; background: linear-gradient(135deg, #ff3b6b, #ff8fab); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.4;">
+Janamdin Mubarak Ho Jaana ❤️
+</h2>
 
-unlockBtn.onclick=()=>{
-  if(pwd.value==='0000'){
-    lockScreen.style.display='none';
-    content.style.display='block';
-    render();
-    startPageHearts();
-  }else{
+Aaj tumhara din he…
+
+Or me chahta hu ki
+
+Yeh din tumhare liye sabse khas ho.
+
+
+Allah tumhe hamesha khush rakhe,
+
+Tumhari har dua qubool kare,
+
+Or tumhe wo sab de jo tumhare dil me he.
+
+
+<div style="font-size:22px; margin-top:25px;">🌙 Ameen 🌙</div>
+</div>`,
+
+    `<div style="text-align:center; line-height:2.2; font-size:19px; padding: 25px;">
+
+Jaana,
+
+
+Tum meri zindagi ki sabse khoobsurat yaad ho.
+
+
+Tumhari hansi,
+
+Tumhari baatein,
+
+Tumhara gussa,
+
+Tumhara pyaar…
+
+
+Sab kuch mere dil me hamesha ke liye mehfooz he.
+
+
+Aaj tumhara janamdin he,
+
+Or me chahta hu ki tum khush raho,
+
+Hamesha muskurati raho.
+
+
+Bhale hi me tumhare saath nahi hu,
+
+Par meri duayen hamesha tumhare saath he.
+
+
+<div style="font-size:22px; margin-top:25px;">❤️ Happy Birthday Jaana ❤️</div>
+</div>`,
+
+    `<div style="text-align:center; line-height:2.2; font-size:19px; padding: 25px;">
+
+<b style="font-size:26px; display:block; margin-bottom:25px;">
+Meri Tamanna 💫
+</b>
+
+Me chahta hu…
+
+
+Tum hamesha khush raho,
+
+Tumhare chehre par hamesha muskaan rahe.
+
+
+Tumhari zindagi me sirf pyaar ho,
+
+Sirf sukoon ho.
+
+
+Tum apne sapne poore karo,
+
+Apni manzil pao.
+
+
+Or jab bhi tum aasman ki taraf dekho,
+
+To yaad rakhna…
+
+
+Kahi na kahi,
+
+Koi tumhare liye dua kar raha he.
+
+
+<div style="font-size:20px; margin-top:25px;">🌟 Wo me hu jaana 🌟</div>
+</div>`,
+
+    `<div style="text-align:center; line-height:2.2; font-size:20px; padding: 25px;">
+
+<div style="font-size:55px; margin-bottom:25px;">🌙✨☪️</div>
+
+<b style="font-size:28px; display:block; margin-bottom:30px; background: linear-gradient(135deg, #ff3b6b, #ff8fab); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.4;">
+Aakhri Baat 💫
+</b>
+
+Jaana,
+
+
+Allah tumhe duniya ki saari khushiyan de,
+
+Tumhari har dua qubool kare,
+
+Tumhe nek insaan banaye.
+
+
+Tum hamesha apne maa-baap ka khyaal rakhna,
+
+Unki izzat karna.
+
+
+Apni sehat ka dhyan rakhna,
+
+Tablet lena bhoolna mat.
+
+
+Or haa…
+
+Kabhi-kabhi mujhe yaad kar lena.
+
+
+<div style="font-size:22px; margin-top:25px;">🤲 Allah Hafiz Jaana 🤲</div>
+
+<div style="margin-top:30px; font-size:24px;">
+❤️ Happy Birthday ❤️
+</div>
+
+<button class="love-btn" onclick="birthdayHearts()" style="margin-top:30px;">
+  🎂 Thank You ❤️
+  <div style="font-size:14px; margin-top:6px;">👆 tap kro</div>
+</button>
+</div>`
+  ];
+
+  let i = 0;
+  let isBirthdayMode = false; // Track if birthday mode is active
+  let wrongAttempts = 0; // Track wrong password attempts
+  const overlay = document.getElementById('overlay');
+  const lockScreen = document.getElementById('lockScreen');
+  const content = document.getElementById('content');
+  const page = document.getElementById('page');
+  const count = document.getElementById('count');
+  const pwd = document.getElementById('pwd');
+  const pwdError = document.getElementById('pwdError');
+
+  // Open Modal
+  openBtn.onclick = () => {
+    overlay.classList.add('open');
+    lockScreen.style.display = 'block';
+    content.style.display = 'none';
+    pwd.value = '';
+    pwdError.innerText = '';
+    wrongAttempts = 0; // Reset attempts
+  };
+
+  // Unlock
+  unlockBtn.onclick = () => {
+    const password = pwd.value.trim();
     
-pwdError.innerText='Password wrong — “kon ho?”';
-lockScreen.classList.remove('shake');
-void lockScreen.offsetWidth;
-lockScreen.classList.add('shake');
-if(navigator.vibrate) navigator.vibrate(150);
+    // Birthday Password (2811)
+    if (password === '2811') {
+      isBirthdayMode = true;
+      i = 0; // Start from first birthday page
+      lockScreen.style.display = 'none';
+      content.style.display = 'block';
+      renderBirthday();
+      startPageHearts();
+      // Play music
+      const music = document.getElementById('bgMusic');
+      music.play().catch(e => console.log('Audio play failed:', e));
+      wrongAttempts = 0;
+    }
+    // Normal Password (0000)
+    else if (password === '0000') {
+      isBirthdayMode = false;
+      i = 0; // Start from first normal page
+      lockScreen.style.display = 'none';
+      content.style.display = 'block';
+      render();
+      startPageHearts();
+      // Play music
+      const music = document.getElementById('bgMusic');
+      music.play().catch(e => console.log('Audio play failed:', e));
+      wrongAttempts = 0;
+    }
+    // Wrong Password
+    else {
+      wrongAttempts++;
+      
+      // Show hint after 2 wrong attempts
+      if (wrongAttempts >= 2) {
+        pwdError.innerHTML = '❌ Password wrong<br><span style="font-size:13px; opacity:0.8;">Hint: kon ho tum? 🤔</span>';
+      } else {
+        pwdError.innerText = '❌ Password wrong — "kon ho?"';
+      }
+      
+      lockScreen.classList.remove('shake');
+      void lockScreen.offsetWidth;
+      lockScreen.classList.add('shake');
+      if (navigator.vibrate) navigator.vibrate(150);
+      
+      setTimeout(() => {
+        lockScreen.classList.remove('shake');
+        if (wrongAttempts < 2) {
+          pwdError.innerText = '';
+        }
+      }, 3000);
+    }
+  };
 
+  // Enter key to unlock
+  pwd.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      unlockBtn.click();
+    }
+  });
+
+  // Close Modal
+  closeBtn.onclick = () => {
+    overlay.classList.remove('open');
+    stopPageHearts();
+  };
+
+  // Navigation
+  prevBtn.onclick = () => {
+    const maxPages = isBirthdayMode ? birthdayPages.length : pages.length;
+    if (i > 0) {
+      i--;
+      isBirthdayMode ? renderBirthday() : render();
+    }
+  };
+
+  nextBtn.onclick = () => {
+    const maxPages = isBirthdayMode ? birthdayPages.length : pages.length;
+    if (i < maxPages - 1) {
+      i++;
+      isBirthdayMode ? renderBirthday() : render();
+    }
+  };
+
+  // Render Normal Page
+  function render() {
+    // Pages with HTML (last 2 pages)
+    if (i === pages.length - 1 || i === pages.length - 2) {
+      page.innerHTML = pages[i];
+    } else {
+      page.innerText = pages[i];
+    }
+    count.innerText = (i + 1) + ' / ' + pages.length;
+    page.scrollTop = 0;
+    
+    // Add fade animation
+    page.style.animation = 'none';
+    setTimeout(() => {
+      page.style.animation = 'textFadeIn 0.8s ease';
+    }, 10);
   }
-};
 
-closeBtn.onclick=()=>{
-  overlay.classList.remove('open');
-  stopPageHearts();
-};
-prevBtn.onclick=()=>{ if(i>0){ i--; render(); } };
-nextBtn.onclick=()=>{ if(i<pages.length-1){ i++; render(); } };
-
-function render(){
-  // Pages that contain HTML markup (Page 8 & 9)
-  if(i === pages.length-1 || i === pages.length-2){
-    page.innerHTML = pages[i];
-  }else{
-    page.innerText = pages[i];
+  // Render Birthday Page
+  function renderBirthday() {
+    page.innerHTML = birthdayPages[i];
+    count.innerText = (i + 1) + ' / ' + birthdayPages.length;
+    page.scrollTop = 0;
+    
+    // Add fade animation
+    page.style.animation = 'none';
+    setTimeout(() => {
+      page.style.animation = 'textFadeIn 0.8s ease';
+    }, 10);
   }
-  count.innerText=(i+1)+' / '+pages.length;
-  page.scrollTop = 0;
-}
 });
 
-// ❤️ Background heart animation (safe for scroll)
-function startHearts(){
-  heartInterval = setInterval(()=>{
-    const h=document.createElement('div');
-    h.className='bg-heart';
-    h.style.left=Math.random()*100+'%';
-    h.style.bottom='-20px';
-    h.style.animationDuration=(6+Math.random()*6)+'s';
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),12000);
-  },900);
-}
-
-
-
-// ❤️ Background heart animation INSIDE text area (after unlock)
+// ❤️ Background Hearts in Page Area
 let heartInterval;
-function startPageHearts(){
-  if(heartInterval) return;
-  const pageEl = document.getElementById('page');
-  if(!pageEl) return;
 
-  heartInterval = setInterval(()=>{
-    const h=document.createElement('div');
-    h.className='bg-heart';
-    h.style.left=Math.random()*100+'%';
-    h.style.bottom='-20px';
-    h.style.animationDuration=(6+Math.random()*6)+'s';
+function startPageHearts() {
+  if (heartInterval) return;
+  const pageEl = document.getElementById('page');
+  if (!pageEl) return;
+
+  heartInterval = setInterval(() => {
+    const h = document.createElement('div');
+    h.className = 'bg-heart';
+    h.style.left = Math.random() * 100 + '%';
+    h.style.bottom = '-30px';
+    h.style.animationDuration = (8 + Math.random() * 8) + 's';
     pageEl.appendChild(h);
-    setTimeout(()=>h.remove(),12000);
-  },900);
+    setTimeout(() => h.remove(), 16000);
+  }, 1200);
 }
 
-
-function stopPageHearts(){
-  if(heartInterval){
+function stopPageHearts() {
+  if (heartInterval) {
     clearInterval(heartInterval);
     heartInterval = null;
   }
 }
 
-
-function page9Hearts(){
-  for(let i=0;i<45;i++){
-    const h=document.createElement('div');
-    h.className='fall-heart';
-    h.style.left=Math.random()*100+'%';
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),2000);
+// ❤️ Falling Hearts (Button Click)
+function page9Hearts() {
+  // Create burst of hearts
+  for (let i = 0; i < 60; i++) {
+    setTimeout(() => {
+      const h = document.createElement('div');
+      h.className = 'fall-heart';
+      h.style.left = Math.random() * 100 + '%';
+      h.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+      h.style.animationDelay = (Math.random() * 0.3) + 's';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 4000);
+    }, i * 50);
+  }
+  
+  // Vibrate if supported
+  if (navigator.vibrate) {
+    navigator.vibrate([100, 50, 100, 50, 100]);
   }
 }
 
+// 🎂 Birthday Hearts (Special for birthday page)
+function birthdayHearts() {
+  // Create massive burst of hearts
+  for (let i = 0; i < 80; i++) {
+    setTimeout(() => {
+      const h = document.createElement('div');
+      h.className = 'fall-heart';
+      h.style.left = Math.random() * 100 + '%';
+      h.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+      h.style.animationDelay = (Math.random() * 0.3) + 's';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 4000);
+    }, i * 40);
+  }
+  
+  // Vibrate pattern for birthday
+  if (navigator.vibrate) {
+    navigator.vibrate([100, 50, 100, 50, 100, 50, 200]);
+  }
+}
 </script>
 
 </body>
